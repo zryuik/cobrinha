@@ -13,6 +13,7 @@ window = pygame.display.set_mode((WINDOWS_WIDTH,WINDOWS_HEIGHT))
 cobra_pos = [(POS_INICIAL_X,POS_INICIAL_Y)]
 cobra_surface = pygame.Surface((BLOCK,BLOCK))
 cobra_surface.fill((53,59,72))
+direcao = K_LEFT
 
 while True:
     pygame.time.Clock().tick(10)
@@ -22,12 +23,23 @@ while True:
         if evento.type == QUIT:
             pygame.quit()
             quit()
+
+        elif evento.type == KEYDOWN:
+            if evento.key in [K_UP,K_DOWN,K_LEFT,K_RIGHT,K_w,K_a,K_s,K_d]:
+                direcao = evento.key
     for pos in cobra_pos:
         window.blit(cobra_surface,pos)
 
-    # cobra_pos[0] = cobra_pos[0][0] + BLOCK,cobra_pos[0][1] #Movimenta para direira
-    # cobra_pos[0] = cobra_pos[0][0] - BLOCK,cobra_pos[0][1] #Movimenta para esquerda
-    # cobra_pos[0] = cobra_pos[0][0] ,cobra_pos[0][1] - BLOCK #Movimenta para cima
-    # cobra_pos[0] = cobra_pos[0][0] ,cobra_pos[0][1] + BLOCK #Movimenta para baixo
+    if direcao == K_RIGHT or direcao == K_d:
+        cobra_pos[0] = cobra_pos[0][0] + BLOCK,cobra_pos[0][1] #Movimenta para direira
+
+    elif direcao == K_LEFT or direcao == K_a:
+        cobra_pos[0] = cobra_pos[0][0] - BLOCK,cobra_pos[0][1] #Movimenta para esquerda
+
+    elif direcao == K_UP or direcao == K_w:
+        cobra_pos[0] = cobra_pos[0][0] ,cobra_pos[0][1] - BLOCK #Movimenta para cima
+
+    elif direcao == K_DOWN or direcao == K_s:
+        cobra_pos[0] = cobra_pos[0][0] ,cobra_pos[0][1] + BLOCK #Movimenta para baixo
     
     pygame.display.update()
