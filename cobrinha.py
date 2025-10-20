@@ -15,6 +15,7 @@ cobra_surface = pygame.Surface((BLOCK,BLOCK))
 cobra_surface.fill((53,59,72))
 
 while True:
+    pygame.time.Clock().tick(10)
     window.fill((68,189,50))
 
     for evento in pygame.event.get():
@@ -23,5 +24,10 @@ while True:
             quit()
     for pos in cobra_pos:
         window.blit(cobra_surface,pos)
+
+    # cobra_pos[0] = cobra_pos[0][0] + BLOCK,cobra_pos[0][1] #Movimenta para direira
+    # cobra_pos[0] = cobra_pos[0][0] - BLOCK,cobra_pos[0][1] #Movimenta para esquerda
+    # cobra_pos[0] = cobra_pos[0][0] ,cobra_pos[0][1] - BLOCK #Movimenta para cima
+    # cobra_pos[0] = cobra_pos[0][0] ,cobra_pos[0][1] + BLOCK #Movimenta para baixo
     
     pygame.display.update()
