@@ -9,6 +9,11 @@ POS_INICIAL_X = WINDOWS_WIDTH / 2
 POS_INICIAL_Y = WINDOWS_HEIGHT / 2
 BLOCK = 10
 
+
+def colisao(pos1,pos2):
+    return pos1 == pos2
+
+
 def verifica_margens(pos):
     if 0 <= pos[0] < WINDOWS_WIDTH and 0 <= pos[1] < WINDOWS_HEIGHT:
         return False
@@ -52,6 +57,9 @@ while True:
                 direcao = evento.key
 
     window.blit(maca_surface,maca_pos)   
+
+    if (colisao(cobra_pos[0],maca_pos)):
+        maca_pos = gera_pos_aleatoria()
 
     for pos in cobra_pos:
         window.blit(cobra_surface,pos)
