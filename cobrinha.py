@@ -24,6 +24,10 @@ def gera_pos_aleatoria():
     x = random.randint(0, WINDOWS_WIDTH)
     y = random.randint(0, WINDOWS_HEIGHT)
 
+
+    if (x,y) in obstaculo_pos:
+        gera_pos_aleatoria()
+
     return x // BLOCK * BLOCK , y // BLOCK * BLOCK
 
 def game_over():
@@ -37,6 +41,11 @@ cobra_pos = [(POS_INICIAL_X,POS_INICIAL_Y),(POS_INICIAL_X + BLOCK,POS_INICIAL_Y)
 cobra_surface = pygame.Surface((BLOCK,BLOCK))
 cobra_surface.fill((53,59,72))
 direcao = K_LEFT
+
+obstaculo_pos = []
+obstaculo_surface = pygame.Surface((BLOCK,BLOCK))
+obstaculo_surface.fill((0,0,0))
+
 
 maca_surface = pygame.Surface((BLOCK,BLOCK))
 maca_surface.fill((255,0,0))
@@ -79,6 +88,12 @@ while True:
     if (colisao(cobra_pos[0],maca_pos)):
         cobra_pos.append((-10,-10))
         maca_pos = gera_pos_aleatoria()
+        obstaculo_pos.append(gera_pos_aleatoria())
+
+    for pos in obstaculo_pos:
+        if colisao(cobra_pos[0],pos):
+            game_over()
+        window.blit(obstaculo_surface,pos)
 
     for pos in cobra_pos:
         window.blit(cobra_surface,pos)
