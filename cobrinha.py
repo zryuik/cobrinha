@@ -54,7 +54,25 @@ while True:
 
         elif evento.type == KEYDOWN:
             if evento.key in [K_UP,K_DOWN,K_LEFT,K_RIGHT,K_w,K_a,K_s,K_d]:
-                direcao = evento.key
+                if evento.key == K_UP and direcao == K_DOWN:
+                    continue
+                elif evento.key == K_DOWN and direcao == K_UP:
+                    continue
+                elif evento.key == K_LEFT and direcao == K_RIGHT:
+                    continue
+                elif evento.key == K_RIGHT and direcao == K_LEFT:
+                    continue
+
+                elif evento.key == K_w and direcao == K_s:
+                    continue
+                elif evento.key == K_s and direcao == K_w:
+                    continue
+                elif evento.key == K_a and direcao == K_d:
+                    continue
+                elif evento.key == K_d and direcao == K_a:
+                    continue
+                else:
+                    direcao = evento.key
 
     window.blit(maca_surface,maca_pos)   
 
@@ -66,6 +84,8 @@ while True:
         window.blit(cobra_surface,pos)
 
     for item in range(len(cobra_pos)- 1, 0, -1):
+        if colisao(cobra_pos[0],cobra_pos[item]):
+            game_over()
         cobra_pos[item] = cobra_pos[item-1]
 
     if verifica_margens(cobra_pos[0]):
