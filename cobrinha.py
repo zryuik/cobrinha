@@ -17,18 +17,20 @@ def colisao(pos1,pos2):
 
 
 def verifica_margens(pos):
+    """Verifica se a cobra saiu da tela."""
     if 0 <= pos[0] < WINDOWS_WIDTH and 0 <= pos[1] < WINDOWS_HEIGHT:
         return False
     else:
         return True
 
 def gera_pos_aleatoria():
+    """Gera uma posição aleatória que não colida com cobra nem obstáculos"""
     x = random.randint(0, WINDOWS_WIDTH)
     y = random.randint(0, WINDOWS_HEIGHT)
 
 
     if (x,y) in obstaculo_pos:
-        gera_pos_aleatoria()
+        return gera_pos_aleatoria()
 
     return x // BLOCK * BLOCK , y // BLOCK * BLOCK
 
