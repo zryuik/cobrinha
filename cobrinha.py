@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 ##
 import random
-#
+##
 WINDOWS_WIDTH = 600
 WINDOWS_HEIGHT = 600
 POS_INICIAL_X = WINDOWS_WIDTH / 2
